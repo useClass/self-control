@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity implements View.OnClickListener
@@ -20,7 +21,7 @@ public class MainActivity extends Activity implements View.OnClickListener
 
 
     // tab中的四个帧布局
-    private FrameLayout homeFrameLayout, taskFrameLayout, rewardFrameLayout,meFrameLayout;
+    private LinearLayout homeFrameLayout, taskFrameLayout, rewardFrameLayout,meFrameLayout;
 
     // tab中的四个帧布局中的四个图片组件
     private ImageView homeImageView, taskImageView, rewardImageView, meImageView;
@@ -98,10 +99,10 @@ public class MainActivity extends Activity implements View.OnClickListener
      * 初始化组件
      */
     private void initView() {
-        homeFrameLayout = (FrameLayout) findViewById(R.id.homeLayout);
-        taskFrameLayout = (FrameLayout) findViewById(R.id.taskLayout);
-        rewardFrameLayout = (FrameLayout) findViewById(R.id.rewardLayout);
-        meFrameLayout = (FrameLayout) findViewById(R.id.meLayout);
+        homeFrameLayout = (LinearLayout) findViewById(R.id.homeLayout);
+        taskFrameLayout = (LinearLayout) findViewById(R.id.taskLayout);
+        rewardFrameLayout = (LinearLayout) findViewById(R.id.rewardLayout);
+        meFrameLayout = (LinearLayout) findViewById(R.id.meLayout);
 
 
         homeImageView = (ImageView) findViewById(R.id.homeImageView);

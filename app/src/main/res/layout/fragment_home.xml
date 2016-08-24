@@ -31,6 +31,24 @@
             android:gravity="center"
             android:textColor="@color/red"
             android:text="520" />
+
+        <TextView
+            android:layout_width="186dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_rewardName"
+            android:layout_gravity="center_horizontal"
+            android:typeface="monospace"
+            android:textSize="35sp"
+            android:gravity="center"
+            android:textColor="@color/green" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/refreshReward"
+            android:id="@+id/btn_refreshReward"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.46" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,5 +78,14 @@
             android:layout_weight="0.60"
             android:textColor="@color/red"
             android:text="120" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/updateNowScore"
+            android:id="@+id/btn_updateNowScore"
+            android:layout_gravity="center_horizontal|bottom" />
     </LinearLayout>
+
+
+
 </FrameLayout>

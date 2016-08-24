@@ -62,10 +62,10 @@ public class TaskService {
 
     }
 
-    public void update(String id,String task_name,String task_score)
+    public void update(Task task)
     {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String sql = "update task set task_name="+task_name+ ",task_score="+task_score+"where id"+id;
+        String sql = "update task set task_name="+task.getTaskName()+ ",task_score="+task.getTaskScore()+"where id = "+task.getTask_id();
         db.execSQL(sql);
 
     }

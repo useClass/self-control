@@ -26,11 +26,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sql_task = "create table task(task_id integer primary key autoincrement,task_name varchar(50),task_score integer )";
         String sql_reward = "create table reward(reward_id integer primary key autoincrement,reward_name varchar(50),reward_score integer )";
-        String sql_myscore = "create table myscore(score integer)";
+        String sql_performance = "create table performance(performance_id integer primary key autoincrement,task_id integer,tak_name varchar(50),date date  )";
+        String sql_myscore = "create table myscore(score_id integer primary key autoincrement,score integer)";
+        String sql_scoreInit = "insert into myscore(score_id,score) values('1','0')";
 
         db.execSQL(sql_task);
         db.execSQL(sql_reward);
+        db.execSQL(sql_performance);
         db.execSQL(sql_myscore);
+        db.execSQL(sql_scoreInit);
     }
 
 

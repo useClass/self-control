@@ -38,10 +38,10 @@ import util.DatabaseHelper;
 public class TaskFragment extends Fragment {
 
 
-    ListView lv_task;  //声明一个ListView对象
-    Button btn_addtask;
+    private ListView lv_task;  //声明一个ListView对象
+    private Button btn_addtask;
     private List<Task> taskList = new ArrayList<Task>();  //声明一个list，动态存储要显示的信息
-    TaskService taskService;
+    private TaskService taskService;
 
     private OnFragmentInteractionListener mListener;
 
@@ -97,6 +97,7 @@ public class TaskFragment extends Fragment {
                                 task.setTaskScore(taskScore);
                                 taskList.add(task);
                                 taskService.add(task);
+                                taskList = taskService. query();
                                 listViewShow(lv_task,taskList);
 
                                 Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
@@ -134,8 +135,13 @@ public class TaskFragment extends Fragment {
                         switch (i)
                         {
                             case 0:
-
-
+                             //   Task updateTask = new Task();
+                             //   updateTask.setTask_id(taskList.get(task_position).getTask_id());
+                             //   updateTask.setTaskName(taskList.get(task_position).getTaskName());
+                             //   updateTask.setTaskScore(taskList.get(task_position).getTaskScore());
+                             //   taskService.update(updateTask);
+                             //   taskList = taskService. query();
+                             //   listViewShow(lv_task,taskList);
                                 break;
                             case 1:
                                taskService.delete(taskList.get(task_position).getTask_id());

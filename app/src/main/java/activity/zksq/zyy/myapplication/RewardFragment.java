@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import model.Reward;
+import service.MyScoreService;
 import service.RewardService;
 
 
@@ -70,6 +72,8 @@ public class RewardFragment extends Fragment {
                 LayoutInflater dialogInflater = getActivity().getLayoutInflater();
                 View dialogView = dialogInflater.inflate(R.layout.dialog_reward_con, null);
 
+                final View homeView = getActivity().getLayoutInflater().inflate(R.layout.fragment_home,null);
+
                 final EditText et_rewardName = (EditText)dialogView.findViewById(R.id.et_rewardName);
                 final EditText et_rewardScore = (EditText)dialogView.findViewById(R.id.et_rewardScore);
 
@@ -85,6 +89,25 @@ public class RewardFragment extends Fragment {
                                 rewardList.add(reward);
                                 rewardService.add(reward);
                                 listViewShow(lv_reward,rewardList);
+
+
+//                                TextView tv_rewardScore = (TextView)homeView.findViewById(R.id.tv_myScore);
+//                                TextView tv_rewardName = (TextView)homeView.findViewById(R.id.tv_rewardName);
+//                                if(tv_rewardScore.getText().toString().equals("无下一阶段奖励"))
+//                                {
+//                                    tv_rewardScore.setText(rewardName);
+//                                }
+//                                else
+//                                {
+//                                    MyScoreService myScoreService = new MyScoreService(getActivity());
+//                                    int myNowScore = Integer.parseInt(myScoreService.query());
+//                                    if(Integer.parseInt(rewardScore) > myNowScore && Integer.parseInt(rewardScore) < Integer.parseInt(tv_rewardScore.getText().toString()))
+//                                    {
+//                                        tv_rewardScore.setText(rewardScore);
+//                                        tv_rewardName.setText(rewardName);
+//                                    }
+//
+//                                }
 
                                 Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
                             }
@@ -128,16 +151,7 @@ public class RewardFragment extends Fragment {
     //用于显示更新ListView显示
     private void listViewShow(ListView listView,List<Reward> list)
     {
-        if(listView == null)
-        {
-            System.out.println("aaaaaaaaaaaaaaaaa");
-            return;
-        }
-        if(list == null && list.size() == 0)
-        {
-            System.out.println("bbbbbbbbbbbb");
-            return;
-        }
+
         ArrayList<Map<String,String>> rewardData= new ArrayList<Map<String,String>>();;
         for (int i=0;i<list.size();i++)
         {
