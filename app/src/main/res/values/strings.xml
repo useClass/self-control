@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">自控神器</string>
+    <string name="homepage">首页</string>
+    <string name="task">任务</string>
+    <string name="reward">奖励</string>
+    <string name="me">我</string>
+
+    <string name="totleScore">下一阶段奖励分数</string>
+    <string name="nowScore">当前分数</string>
+    <string name="addTask">添加新任务</string>
+    <string name="addReward">添加新奖励</string>
+
+
+    <string name="firsttest">第一个测试页面Fragment</string>
+    <string name="secondtest">第二个测试页面Fragment</string>
+    <string name="thirdtest">第三个测试页面Fragment</string>
+    <string name="forthtest">第四个测试页面Fragment</string>
+
+    <string name="taskName">任务名称设置</string>
+    <string name="taskset">任务设置</string>
+    <string name="taskScore">任务分数设置</string>
+    <string name="okaTaskAdd">确定添加</string>
+    <string name="cancelTaskAdd">取消操作</string>
+
+
+    <string name="rewardName">奖励名称设置</string>
+    <string name="rewardScore">奖励分数设置</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

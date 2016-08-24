@@ -1,0 +1,64 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal|top"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/totleScore"
+            android:id="@+id/tv_tip1"
+            android:typeface="monospace"
+            android:textSize="35sp"
+            android:layout_weight="0.46"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_totalScore"
+            android:typeface="monospace"
+            android:textSize="35sp"
+            android:gravity="center"
+            android:textColor="@color/red"
+            android:text="520" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:layout_gravity="center"
+        android:weightSum="1" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nowScore"
+            android:id="@+id/tv_tip2"
+            android:layout_weight="0.46"
+            android:typeface="monospace"
+            android:textSize="35sp"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_myScore"
+            android:typeface="monospace"
+            android:textSize="35sp"
+            android:gravity="center"
+            android:layout_weight="0.60"
+            android:textColor="@color/red"
+            android:text="120" />
+    </LinearLayout>
+</FrameLayout>

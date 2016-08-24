@@ -1,0 +1,151 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="activity.zksq.zyy.myapplication.MainActivity" >
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottomArea"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="#FFFFFF" >
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottomArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        >
+
+        <!-- tab的分割线 -->
+        <ImageView
+            android:id="@+id/tabTop"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#B6B6B6" />
+
+
+        <!-- tab的四个按钮 -->
+        <LinearLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tabTop"
+            android:layout_marginTop="1dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <!-- 微信按钮 -->
+            <!-- 使用FrameLayout，最主要的原因是使用它可以很容易的再添加一个消息提醒的小图片 -->
+            <FrameLayout
+                android:id="@+id/homeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                android:paddingBottom="2dp">
+
+                <ImageView
+                    android:id="@+id/homeImageView"
+                    android:layout_width="96px"
+                    android:layout_height="84px"
+                    android:layout_gravity="top|center"
+                    android:src="@drawable/home" />
+
+                <TextView
+                    android:id="@+id/homeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/homepage"
+                    android:textColor="#45C01A"
+                    android:layout_gravity="bottom|center"
+                    android:textSize="13sp" />
+            </FrameLayout>
+
+            <!-- 联系人按钮 -->
+            <FrameLayout
+                android:id="@+id/taskLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                android:paddingBottom="2dp">
+
+                <ImageView
+                    android:id="@+id/taskImageView"
+                    android:layout_width="96px"
+                    android:layout_height="84px"
+                    android:layout_gravity="top|center"
+                    android:src="@drawable/task" />
+
+                <TextView
+                    android:id="@+id/taskTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/task"
+                    android:textColor="#999999"
+                    android:layout_gravity="bottom|center"
+                    android:textSize="13sp" />
+            </FrameLayout>
+
+            <!-- 发现按钮 -->
+            <FrameLayout
+                android:id="@+id/rewardLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                android:paddingBottom="2dp">
+
+                <ImageView
+                    android:id="@+id/rewardImageView"
+                    android:layout_width="96px"
+                    android:layout_height="84px"
+                    android:layout_gravity="top|center"
+                    android:src="@drawable/reward" />
+
+                <TextView
+                    android:id="@+id/rewardTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reward"
+                    android:textColor="#999999"
+                    android:layout_gravity="bottom|center"
+                    android:textSize="13sp" />
+            </FrameLayout>
+
+            <!-- 我按钮 -->
+            <FrameLayout
+                android:id="@+id/meLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                android:paddingBottom="2dp">
+
+                <ImageView
+                    android:id="@+id/meImageView"
+                    android:layout_width="96px"
+                    android:layout_height="84px"
+                    android:layout_gravity="top|center"
+                    android:src="@drawable/me" />
+
+                <TextView
+                    android:id="@+id/meTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/me"
+                    android:textColor="#999999"
+                    android:layout_gravity="bottom|center"
+                    android:textSize="13sp" />
+            </FrameLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
