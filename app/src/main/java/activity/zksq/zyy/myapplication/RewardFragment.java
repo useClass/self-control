@@ -137,6 +137,13 @@ public class RewardFragment extends Fragment {
                                 rewardService.delete(slt_reward_id);
                                 rewardList = rewardService. query();
                                 listViewShow(lv_reward,rewardList);
+
+                                Intent intent = new Intent();
+                                intent.setAction("ACTION_REWARD_DELETE");
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("delReward",slt_reward);
+                                intent.putExtras(bundle);
+                                LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
                                 break;
                             case 1:
                                // Toast.makeText(getActivity(),slt_reward_id,Toast.LENGTH_LONG).show();

@@ -72,52 +72,18 @@ public class HomeFragment extends Fragment {
         myScoreService = new MyScoreService(getActivity());
         rewardService = new RewardService(getActivity());
 
+
+//查询数据库显示现在总分数
         myScore = myScoreService.query();
         if(myScore != null)
             tv_myScore.setText(myScore);
         else
-            tv_myScore.setText(0);
-
-        List<Reward> allReward = rewardService.query();
-        if(allReward == null || allReward.size() == 0)
         {
-            tv_totalScore.setText("无下一阶段奖励");
-        }
-        else
-        {
-            Collections.sort(allReward,new Comparator<Reward>() {
-                    @Override
-                    public int compare(Reward t1, Reward t2) {
-                        if (Integer.parseInt(t1.getReward_score())>Integer.parseInt(t2.getReward_score()))
-                        {
-                            return 1;
-                        }
-                        else if(Integer.parseInt(t1.getReward_score())<Integer.parseInt(t2.getReward_score()))
-                        {
-                            return -1;
-                        }
-                        else
-                        {
-                            return 0;
-                        }
-                    }
-                });
-            for (Reward r:allReward)
-            {
-                if(Integer.parseInt(myScore)<Integer.parseInt(r.getReward_score()))
-                {
-                    nextRewardScore = r.getReward_score();
-                    String nextRewardName = r.getReward_name();
-                    tv_totalScore.setText(nextRewardScore);
-                    tv_rewardName.setText(nextRewardName);
-                    break;
-                }
-
-            }
+            myScore = "0";
+            tv_myScore.setText(myScore);
         }
 
-
-
+        showRewardScore();
 
         btn_updateNowScore = (Button)view.findViewById(R.id.btn_updateNowScore);
         btn_updateNowScore.setOnClickListener(new View.OnClickListener() {
@@ -146,34 +112,92 @@ public class HomeFragment extends Fragment {
         });
 
 
-        //接收广播
+        //接收广播,奖励列表中添加新奖励
         LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("ACTION_MYSCORE_CHANGE");
 
-        BroadcastReceiver myScoreReceiver = new BroadcastReceiver() {
+        BroadcastReceiver addRewardReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Reward newReward = (Reward)intent.getSerializableExtra("newReward");
-                String newScore = newReward.getReward_score();
-                String newName = newReward.getReward_name();
-                if(nextRewardScore == null)
-                {
-                    tv_totalScore.setText(newScore);
-                    tv_rewardName.setText(newName);
-                }
-                if(Integer.parseInt(newScore) >Integer.parseInt(myScore) && Integer.parseInt(newScore) < Integer.parseInt(nextRewardScore))
-                {
-                    tv_totalScore.setText(newScore);
-                    tv_rewardName.setText(newName);
-                }
+                showRewardScore();
+//                Reward newReward = (Reward)intent.getSerializableExtra("newReward");
+//                String newScore = newReward.getReward_score();
+//                String newName = newReward.getReward_name();
+//
+//                if(nextRewardScore == null)
+//                {
+//                    tv_totalScore.setText(newScore);
+//                    tv_rewardName.setText(newName);
+//                }
+//               else if(Integer.parseInt(newScore) >Integer.parseInt(myScore) && Integer.parseInt(newScore) < Integer.parseInt(nextRewardScore))
+//                {
+//                    tv_totalScore.setText(newScore);
+//                    tv_rewardName.setText(newName);
+//                }
 
             }
         };
-        broadcastManager.registerReceiver(myScoreReceiver,intentFilter);
 
+        //接受广播，奖励列表中删除奖励
+        IntentFilter delRewardFilter = new IntentFilter();
+        delRewardFilter.addAction("ACTION_REWARD_DELETE");
+        BroadcastReceiver delRewardReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                showRewardScore();
+            }
+        };
+
+
+        broadcastManager.registerReceiver(addRewardReceiver,intentFilter);
+        broadcastManager.registerReceiver(delRewardReceiver,delRewardFilter);
         return view;
     }
 
+
+    private void showRewardScore()
+    {
+
+
+
+        List<Reward> allReward = rewardService.query();
+        if(allReward == null || allReward.size() == 0)
+        {
+            tv_totalScore.setText("无奖励");
+        }
+        else
+        {
+            Collections.sort(allReward,new Comparator<Reward>() {
+                @Override
+                public int compare(Reward t1, Reward t2) {
+                    if (Integer.parseInt(t1.getReward_score())>Integer.parseInt(t2.getReward_score()))
+                    {
+                        return 1;
+                    }
+                    else if(Integer.parseInt(t1.getReward_score())<Integer.parseInt(t2.getReward_score()))
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            });
+            for (Reward r:allReward)
+            {
+                if(Integer.parseInt(myScore)<Integer.parseInt(r.getReward_score()))
+                {
+                    nextRewardScore = r.getReward_score();
+                    String nextRewardName = r.getReward_name();
+                    tv_totalScore.setText(nextRewardScore);
+                    tv_rewardName.setText(nextRewardName);
+                    break;
+                }
+
+            }
+        }
+    }
 
 }

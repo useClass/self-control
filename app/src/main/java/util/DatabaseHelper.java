@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.Serializable;
+
 import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
 
 /**
@@ -41,6 +43,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        String sql_del_task = "drop table task";
+        String sql_del_performance = "drop table performance";
+        String sql_hisTask = "create table task_over(task_id integer primary key autoincrement,task_name varchar(50),task_score integer,nec boolean)";
+        String sql_task = "create table task(task_id integer primary key autoincrement,task_name varchar(50),task_score integer )";
+        db.execSQL(sql_del_performance);
+        db.execSQL(sql_del_task);
+        db.execSQL(sql_hisTask);
+        db.execSQL(sql_task);
         /* 当version=2时会执行 */
 
     }
