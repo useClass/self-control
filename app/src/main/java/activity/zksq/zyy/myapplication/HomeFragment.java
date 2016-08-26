@@ -3,12 +3,16 @@ package activity.zksq.zyy.myapplication;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +40,7 @@ public class HomeFragment extends Fragment {
     private String myScore;
     private MyScoreService myScoreService;
     private RewardService rewardService;
+    private String nextRewardScore;
 
     public HomeFragment() {
 
@@ -101,8 +106,10 @@ public class HomeFragment extends Fragment {
             {
                 if(Integer.parseInt(myScore)<Integer.parseInt(r.getReward_score()))
                 {
-                    tv_totalScore.setText(r.getReward_score());
-                    tv_rewardName.setText(r.getReward_name());
+                    nextRewardScore = r.getReward_score();
+                    String nextRewardName = r.getReward_name();
+                    tv_totalScore.setText(nextRewardScore);
+                    tv_rewardName.setText(nextRewardName);
                     break;
                 }
 
@@ -137,6 +144,33 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+
+        //接收广播
+        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("ACTION_MYSCORE_CHANGE");
+
+        BroadcastReceiver myScoreReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Reward newReward = (Reward)intent.getSerializableExtra("newReward");
+                String newScore = newReward.getReward_score();
+                String newName = newReward.getReward_name();
+                if(nextRewardScore == null)
+                {
+                    tv_totalScore.setText(newScore);
+                    tv_rewardName.setText(newName);
+                }
+                if(Integer.parseInt(newScore) >Integer.parseInt(myScore) && Integer.parseInt(newScore) < Integer.parseInt(nextRewardScore))
+                {
+                    tv_totalScore.setText(newScore);
+                    tv_rewardName.setText(newName);
+                }
+
+            }
+        };
+        broadcastManager.registerReceiver(myScoreReceiver,intentFilter);
 
         return view;
     }

@@ -4,11 +4,15 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -91,28 +95,58 @@ public class RewardFragment extends Fragment {
                                 listViewShow(lv_reward,rewardList);
 
 
-//                                TextView tv_rewardScore = (TextView)homeView.findViewById(R.id.tv_myScore);
-//                                TextView tv_rewardName = (TextView)homeView.findViewById(R.id.tv_rewardName);
-//                                if(tv_rewardScore.getText().toString().equals("无下一阶段奖励"))
-//                                {
-//                                    tv_rewardScore.setText(rewardName);
-//                                }
-//                                else
-//                                {
-//                                    MyScoreService myScoreService = new MyScoreService(getActivity());
-//                                    int myNowScore = Integer.parseInt(myScoreService.query());
-//                                    if(Integer.parseInt(rewardScore) > myNowScore && Integer.parseInt(rewardScore) < Integer.parseInt(tv_rewardScore.getText().toString()))
-//                                    {
-//                                        tv_rewardScore.setText(rewardScore);
-//                                        tv_rewardName.setText(rewardName);
-//                                    }
-//
-//                                }
+                                //发送广播,便于其他fragment获取更新界面，reward更新
+                                Intent intent = new Intent();
+                                intent.setAction("ACTION_MYSCORE_CHANGE");
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("newReward",reward);
+                                intent.putExtras(bundle);
+                                LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intent);
 
                                 Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton("取消操作", null).show();
+            }
+        });
+
+        //长按弹出操作列表
+
+
+        lv_reward.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //Toast.makeText(getActivity(),"这是长按弹出来的Toast",Toast.LENGTH_SHORT).show();
+                final int listPosition = i;
+                final String items_operate[] = {"删除","完成"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("操作");
+                builder.setIcon(android.R.drawable.ic_dialog_info);
+                builder.setItems(items_operate, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                       // Toast.makeText(getActivity(),items_operate[i], Toast.LENGTH_SHORT).show();
+                        Reward slt_reward = rewardList.get(listPosition);
+                        String slt_reward_id = slt_reward.getReward_id();
+
+                        switch (i)
+                        {
+                            case 0:
+
+                                rewardService.delete(slt_reward_id);
+                                rewardList = rewardService. query();
+                                listViewShow(lv_reward,rewardList);
+                                break;
+                            case 1:
+                               // Toast.makeText(getActivity(),slt_reward_id,Toast.LENGTH_LONG).show();
+                                break;
+
+                        }
+                    }
+                });
+                builder.create().show();
+                return false;
             }
         });
 

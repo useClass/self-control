@@ -15,13 +15,16 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:weightSum="1">
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/addTask"
-                android:id="@+id/bt_addTack" />
+                android:id="@+id/bt_addTack"
+                android:background="@drawable/bg_button"
+                android:layout_weight="0.11" />
 
         </LinearLayout>
 

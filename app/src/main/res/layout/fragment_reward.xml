@@ -15,13 +15,15 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:weightSum="1">
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/addReward"
-                android:id="@+id/btn_addReward" />
-                android:id="@+id/btn_addReward" />
+                android:id="@+id/btn_addReward"
+                android:background="@drawable/bg_button"
+                android:layout_weight="0.10" />
         </LinearLayout>
 
         <ListView

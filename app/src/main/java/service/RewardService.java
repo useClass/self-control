@@ -34,9 +34,11 @@ public class RewardService {
         List<Reward> rewardList = new ArrayList<Reward>();
 
         while(cursor.moveToNext()){
+            String reward_id = cursor.getString(cursor.getColumnIndex("reward_id"));
             String reward_name = cursor.getString(cursor.getColumnIndex("reward_name"));
             String reward_score = cursor.getString(cursor.getColumnIndex("reward_score"));
             Reward reward = new Reward();
+            reward.setReward_id(reward_id);
             reward.setReward_name(reward_name);
             reward.setReward_score(reward_score);
             rewardList.add(reward);
@@ -46,5 +48,13 @@ public class RewardService {
         cursor.close();
         db.close();
         return rewardList;
+    }
+
+    public void delete(String id)
+    {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String sql = "delete from reward where reward_id ="+id;
+        db.execSQL(sql);
+
     }
 }

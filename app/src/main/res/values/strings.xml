@@ -9,7 +9,7 @@
     <string name="nowScore">当前分数</string>
     <string name="addTask">添加新任务</string>
     <string name="addReward">添加新奖励</string>
-    <string name="updateNowScore">更改当前分数</string>
+    <string name="updateNowScore">设置分数</string>
     <string name="refreshReward">刷新奖励</string>
 
     <string name="firsttest">第一个测试页面Fragment</string>

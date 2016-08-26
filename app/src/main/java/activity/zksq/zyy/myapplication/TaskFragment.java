@@ -158,6 +158,9 @@ public class TaskFragment extends Fragment {
             }
         });
         //  lv_task.setOnCreateContextMenuListener(this);
+
+
+
         return view;
     }
 
